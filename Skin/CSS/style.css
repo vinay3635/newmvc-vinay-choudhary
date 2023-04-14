@@ -1,0 +1,36 @@
+.head{
+	display: flex;
+	font-size: 150%;
+	background-color:orange;
+}
+.button{
+	margin: 50px;
+}
+.body{
+	display: flex;
+	width: 50%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 130%
+}
+.box{
+	margin-left: 40px;
+}
+.link{
+	margin-left: 70%;
+}
+.add{
+	display: flex;
+	font-size: 140%;
+	margin-bottom: 20px;
+}
+.cancel{
+	margin-left: 70%;
+}
+.update{
+	margin-left: 70%;
+	margin-bottom: 30px;
+}
+.submit{
+	margin-left: 6%;
+}
