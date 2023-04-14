@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Product grid</title>
+	<link rel="stylesheet" type="text/css" href="Skin/css/grid.css?<?php echo time(); ?>">
+
+</head>
+
+<body>
+	<?php require_once 'View/Html/header.phtml';?>
+	<div>
+		<label class = "label" style="margin-left: 100px;">Manage Product</lable>
+		<button class = "btn" style="margin-left: 1000px;" ><a style="text-decoration: none;" href="?a=add"> Add Product </a></button>
+	</div><br>
+
+	<table  width="100%" class="table" border="2" style="border-collapse: collapse;">
+		<thead>
+			<tr>
+				<th>Product ID</th>
+				<th>Name</th>
+				<th>Sku</th>
+				<th>Cost</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Description</th>
+				<th>Status</th>
+				<th>Color</th>
+				<th>Material</th>
+				<th>Created_at</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($products as $product){ ?>
+			<tr>
+				<td> <?php echo $product["product_id"] ?> </td>
+				<td> <?php echo $product["name"] ; ?></td>
+				<td> <?php echo $product["sku"] ; ?></td>
+				<td> <?php echo $product["cost"] ; ?></td>
+				<td> <?php echo $product["price"] ; ?></td>
+				<td> <?php echo $product["quantity"] ; ?></td>
+				<td> <?php echo $product["description"] ; ?></td>
+				<td>
+					 <?php 
+					 	if ($product["status"] == 1 ) {
+					 		echo ("Active");
+					 	}
+					 	elseif ($product["status"] == 2) {
+					 		echo ("Inactive");
+					 	}
+					  ?>	
+				</td>
+				<td>
+					 <?php  
+						if($product["color"] == 1){
+							echo ("color1");
+						}
+						elseif($product['color'] == 2){
+							echo ("color2");
+						}
+					 ?>	
+				</td>
+				<td> 
+					<?php  
+						if($product["material"] == 1){
+							echo "material1";
+						}
+						elseif($product["material"]==2){
+							echo "material2"; 
+						}
+					?>	
+				</td>
+				<td> <?php echo $product["created_at"] ; ?>	</td>
+				<td> <a href="Product.php?a=edit&product_id=<?php echo $product['product_id']; ?>">Edit</a> </td>
+				<td> <a href="Product.php?a=delete&product_id=<?php echo $product['product_id'];?>">Delete</a> </td>
+			</tr>
+			<?php } ?>
+		</tbody>
+	</table>
+</body>
+</html> 	

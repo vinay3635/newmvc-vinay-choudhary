@@ -1,0 +1,68 @@
+<?php 
+$category = $this->category;
+$parentCategories = $category->getParentCategories();
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Category</title>
+	<link rel="stylesheet" type="text/css" href="Skin/css/style.css">
+</head>
+<body>
+<form action="<?php echo $this->getUrl('save'); ?>" method="post">
+	<?php $this->setTemplate('html/header.phtml')->render();?>
+	<div class="add">
+		<div>Category</div>
+		<div class="cancel">
+			<button><a href="<?php echo $this->getUrl('grid', null, [], true); ?>">Cancel</a></button>
+		</div>
+		<div class="submit">
+			<button type="submit">Submit</button>
+		</div>
+	</div>
+	<div>Category Information</div>
+	<table>
+		<tr>
+			<td>Parent Category</td>
+			<td>
+				<select>
+					<option>Select Parent</option>
+					<?php 
+					foreach($parentCategories as $categoryId => $path) :
+						$categoryIds = explode('/', $path);
+						foreach($categoryIds as $categoryId):
+							$child = $category->load($categoryId)->name;
+						endforeach;
+						$parent = $category->load($categoryId)->name;
+						$final .= $parent . '>';
+					?>
+							<option value="<?php echo $categoryId; ?>"><?php print_r($final); ?></option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Name</td>
+			<td><input type="text" name="category[name]" value="<?php echo $category->name; ?>"></td>
+		</tr>
+		<tr>
+			<td>Status</td>
+			<td>
+				<select name="category[status]">
+					<?php foreach ($category->getStatusOptions() as $key => $value) : ?>
+					<?php $selected = ($key == $category->getStatus()) ? "selected" : ''; ?>
+					<option value="<?php echo $key; ?>" <?php echo $selected;?>><?php echo $value; ?></option>
+					<?php endforeach; ?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Description</td>
+			<td><input type="text" name="category[description]" value="<?php echo $category->description; ?>"></td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>
